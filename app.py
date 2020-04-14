@@ -23,7 +23,7 @@ client = Client(account_sid, auth_token)
 
 @app.route('/')
 def main():
-    return 'Chinmaya Mission Messaging App'
+    return 'Message Forwarding System'
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
@@ -35,8 +35,10 @@ def incoming_sms():
     resp = MessagingResponse()
 
     # Determine the right reply for this message
-    if body == 'hello':
-        resp.message("Hi!")
+    if body == 'locked' or 'Locked':
+        resp.message("Enter your class and session: (example 'class1 session1')")
+    if body[0:3] == 'class':
+
     elif body == 'bye':
         resp.message("Goodbye")
 
