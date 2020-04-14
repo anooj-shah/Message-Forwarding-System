@@ -57,7 +57,7 @@ def forward_message(class_name, number, name):
     phone_numbers = class_dict['phone_numbers']
     message_body = "Your student " + name + " (" + number + ") is requesting entry into the class"
     for i in phone_numbers:
-        message = client.messages.create(body=message_body, from_='+14783471874', to=i[1])
+        message = client.messages.create(body=message_body, from_='+12816669996', to=i[1])
         print(message.sid)
 
 if __name__ == '__main__':
