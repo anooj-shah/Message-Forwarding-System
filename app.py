@@ -42,5 +42,5 @@ def incoming_sms():
     return str(resp)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
