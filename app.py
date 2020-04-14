@@ -29,6 +29,7 @@ def main():
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
+    number = request.values.get('From', None)
     body = request.values.get('Body', None)
     print(body)
     # Start our TwiML response
@@ -36,18 +37,19 @@ def incoming_sms():
 
     # Determine the right reply for this message
     if body == "test":
-        forward_message()
+        forward_message(number)
         resp.message("Your teachers have been notified")
 
     else:
         resp.message("Invalid message: please enter your class and session # (ex: class1 session1):")
     return str(resp)
 
-def forward_message():
+def forward_message(number):
     class_dict = classes.find_one({'class':'Test'})
     phone_numbers = class_dict['phone_numbers']
+    message_body = "Your student " + number + " is in the waiting room!"
     for i in phone_numbers:
-        message = client.messages.create(body='Your student is in the waiting room!', from_='+14783471874',to=i)
+        message = client.messages.create(body=message_body, from_='+14783471874', to=i)
         print(message.sid)
 
 if __name__ == '__main__':
