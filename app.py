@@ -33,6 +33,8 @@ def incoming_sms():
     body = body.lower()
     body = body.strip()
     body_arr = body.split()
+    class_name = ""
+    name = ""
     if len(body_arr) == 4:
         first_name = body_arr[0]
         last_name = body_arr[1]
