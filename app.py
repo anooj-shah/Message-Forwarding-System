@@ -6,15 +6,15 @@ from flask import Flask
 app = Flask(__name__)
 
 # MongoDB
-DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
-db = DBClient['cmh_classes_db']
-classes = db['classes']
-# post = {'class':'Test', 'phone_numbers':['+18326006867']}
-# classes.insert_one(post)
-
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-client = Client(account_sid, auth_token)
+# DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
+# db = DBClient['cmh_classes_db']
+# classes = db['classes']
+# # post = {'class':'Test', 'phone_numbers':['+18326006867']}
+# # classes.insert_one(post)
+#
+# account_sid = os.environ['TWILIO_ACCOUNT_SID']
+# auth_token = os.environ['TWILIO_AUTH_TOKEN']
+# client = Client(account_sid, auth_token)
 
 # message = client.messages.create(body='Hi there!', from_='+14783471874',to='+18326006867')
 #
