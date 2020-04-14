@@ -6,7 +6,7 @@ from flask import Flask
 app = Flask(__name__)
 
 # MongoDB
-# DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
+DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
 # db = DBClient['cmh_classes_db']
 # classes = db['classes']
 # # post = {'class':'Test', 'phone_numbers':['+18326006867']}
