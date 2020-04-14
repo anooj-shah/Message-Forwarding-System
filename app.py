@@ -41,14 +41,15 @@ def incoming_sms():
         name = first_name + " " + last_name
         class_name = body_arr[2] + body_arr[3]
     else:
-        resp.message("Invalid message: please enter your class andsession# (ex: first_name last_name grade1 session1, first_name last_name session1, first_name last_name kg session2, etc.):")
+        resp.message("Invalid message: please enter your name, class, and session# (ex: Avi Patel grade1 session1, Ravi Rao PreK session1, Mira Singh kg session2, etc.):")
+        return str(resp)
 
     if classes.find_one({'class':class_name}):
         forward_message(class_name, number, name)
         resp.message("Your teachers have been notified")
 
     else:
-        resp.message("Invalid message: please enter your class andsession# (ex: student_first_name last_name grade1 session1, first_name last_name session1, first_name last_name kg session2, etc.):")
+        resp.message("Invalid message: please enter your name, class, and session# (ex: Avi Patel grade1 session1, Ravi Rao PreK session1, Mira Singh kg session2, etc.):")
 
     return str(resp)
 
