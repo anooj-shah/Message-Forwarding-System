@@ -41,16 +41,14 @@ def incoming_sms():
 
     else:
         resp.message("Invalid message: please enter your class and session # (ex: class1 session1):")
-
     return str(resp)
 
 def forward_message():
     class_dict = classes.find_one({'class':'Test'})
     phone_numbers = class_dict['phone_numbers']
     for i in phone_numbers:
-        message = client.messages.create(body='Hi there!', from_='+14783471874',to=i)
+        message = client.messages.create(body='Your student is in the waiting room!', from_='+14783471874',to=i)
         print(message.sid)
 
-forward_message()
 if __name__ == '__main__':
     app.run()
