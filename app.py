@@ -7,19 +7,19 @@ from flask import Flask, request, redirect
 app = Flask(__name__)
 
 # MongoDB
-DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
+mongodb_url = os.environ['MONGO_DB_URL']
+DBClient = pymongo.MongoClient(mongodb_url)
 db = DBClient['cmh_classes_db']
 classes = db['classes']
-# # post = {'class':'Test', 'phone_numbers':['+18326006867']}
-# # classes.insert_one(post)
+# post = {'class':'Test', 'phone_numbers':['+345']}
+# classes.insert_one(post)
 #
+
+
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
-# message = client.messages.create(body='Hi there!', from_='+14783471874',to='+18326006867')
-#
-# print(message.sid)
 
 @app.route('/')
 def main():
@@ -28,7 +28,6 @@ def main():
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
-    # Get the message the user sent our Twilio number
     number = request.values.get('From', None)
     body = request.values.get('Body', None)
     print(body)
@@ -47,7 +46,7 @@ def incoming_sms():
 def forward_message(number):
     class_dict = classes.find_one({'class':'Test'})
     phone_numbers = class_dict['phone_numbers']
-    message_body = "Your student " + number + " is in the waiting room!"
+    message_body = "Your student " + number + " is requesting entry into the class"
     for i in phone_numbers:
         message = client.messages.create(body=message_body, from_='+14783471874', to=i)
         print(message.sid)
