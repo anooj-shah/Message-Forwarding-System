@@ -9,8 +9,8 @@ app = Flask(__name__)
 DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = DBClient['cmh_classes_db']
 classes = db['classes']
-post = {'class':'Test', 'phone_numbers':['+18326006867']}
-classes.insert_one(post)
+# post = {'class':'Test', 'phone_numbers':['+18326006867']}
+# classes.insert_one(post)
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
@@ -23,18 +23,6 @@ client = Client(account_sid, auth_token)
 @app.route('/')
 def main():
     return 'Hello, World!'
-
-@app.route("/sms", methods=['GET', 'POST'])
-def sms_reply():
-    """Respond to incoming calls with a simple text message."""
-    # Start our TwiML response
-    resp = MessagingResponse()
-
-    # Add a message
-    resp.message("The Robots are coming! Head for the hills!")
-
-    return str(resp)
-
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
