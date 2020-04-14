@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 # MongoDB
 DBClient = pymongo.MongoClient("mongodb+srv://anooj101:cmhtest@cmhclasses-s7bby.gcp.mongodb.net/test?retryWrites=true&w=majority")
-# db = DBClient['cmh_classes_db']
-# classes = db['classes']
+db = DBClient['cmh_classes_db']
+classes = db['classes']
 # # post = {'class':'Test', 'phone_numbers':['+18326006867']}
 # # classes.insert_one(post)
 #
@@ -35,15 +35,22 @@ def incoming_sms():
     resp = MessagingResponse()
 
     # Determine the right reply for this message
-    if body == 'locked' or 'Locked':
-        resp.message("Enter your class and session: (example 'class1 session1')")
-    if body[0:3] == 'class':
+    if body == "test":
+        forward_message()
+        resp.message("Your teachers have been notified")
 
-    elif body == 'bye':
-        resp.message("Goodbye")
+    else:
+        resp.message("Invalid message: please enter your class and session # (ex: class1 session1):")
 
     return str(resp)
 
+def forward_message():
+    class_dict = classes.find_one({'class':'Test'})
+    phone_numbers = class_dict['phone_numbers']
+    for i in phone_numbers:
+        message = client.messages.create(body='Hi there!', from_='+14783471874',to=i)
+        print(message.sid)
 
+forward_message()
 if __name__ == '__main__':
     app.run()
