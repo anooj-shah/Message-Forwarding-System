@@ -22,7 +22,7 @@ client = Client(account_sid, auth_token)
 
 @app.route('/')
 def main():
-    return 'Hello, World!'
+    return 'Chinmaya Mission Messaging App'
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
