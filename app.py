@@ -38,7 +38,7 @@ def incoming_sms():
     if len(body_arr) == 4:
         first_name = body_arr[0]
         last_name = body_arr[1]
-        name = first_name + last_name
+        name = first_name + " " + last_name
         class_name = body_arr[2] + body_arr[3]
     else:
         resp.message("Invalid message: please enter your class andsession# (ex: first_name last_name grade1 session1, first_name last_name session1, first_name last_name kg session2, etc.):")
@@ -55,7 +55,7 @@ def incoming_sms():
 def forward_message(class_name, number, name):
     class_dict = classes.find_one({'class':class_name})
     phone_numbers = class_dict['phone_numbers']
-    message_body = "Your student " + name + "(" + number + ") is requesting entry into the class"
+    message_body = "Your student " + name + " (" + number + ") is requesting entry into the class"
     for i in phone_numbers:
         message = client.messages.create(body=message_body, from_='+14783471874', to=i[1])
         print(message.sid)
