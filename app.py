@@ -29,7 +29,9 @@ def incoming_sms():
     print(body)
     # Start our TwiML response
     resp = MessagingResponse()
-
+    if body is None:
+        resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2")
+        return str(resp)
     body = body.lower()
     body = body.strip()
     body_arr = body.split()
