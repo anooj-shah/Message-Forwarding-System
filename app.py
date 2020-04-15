@@ -58,7 +58,8 @@ def incoming_sms():
     else:
         resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2")
         return str(resp)
-
+    return str(resp)
+    
 def forward_message(class_name, number, name):
     class_dict = classes.find_one({'class':class_name})
     phone_numbers = class_dict['phone_numbers']
