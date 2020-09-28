@@ -24,10 +24,16 @@ def main():
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     """
-        * Send a dynamic reply to an incoming text message *
+        * This Function Sends a Reply to Incoming Text Messages From Students*
         Input: number (string), and message body (string)
-        ******************************************************
 
+        ******************************************************
+        The message body must follow these parameters:
+        First_Name Last_Name class session
+        John Doe grade2 session3
+
+        Note: The following will work, but it is not recommended.
+        John Doe grade 2 session 3
         ******************************************************
     """
     number = request.values.get('From', None)
