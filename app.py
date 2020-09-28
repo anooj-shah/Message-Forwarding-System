@@ -38,7 +38,8 @@ def incoming_sms():
     """
     number = request.values.get('From', None)
     body = request.values.get('Body', None)
-    print(body)
+    print("From:", number)
+    print("Message Body: ", body)
     # Start our TwiML response
     resp = MessagingResponse()
     if body is None:
