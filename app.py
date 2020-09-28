@@ -23,7 +23,13 @@ def main():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
-    """Send a dynamic reply to an incoming text message"""
+    """
+        * Send a dynamic reply to an incoming text message *
+        Input: number (string), and message body (string)
+        ******************************************************
+
+        ******************************************************
+    """
     number = request.values.get('From', None)
     body = request.values.get('Body', None)
     print(body)
@@ -32,9 +38,16 @@ def incoming_sms():
     if body is None:
         resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2")
         return str(resp)
+
+    ## Preprocess data ##
+    # Ignore Case
     body = body.lower()
+    # Remove White Space
     body = body.strip()
+    # Split into array by white space 
     body_arr = body.split()
+
+    # Parse data
     class_name = ""
     name = ""
     if len(body_arr) == 4:
@@ -48,7 +61,7 @@ def incoming_sms():
         name = first_name + " " + last_name
         class_name = body_arr[2] + body_arr[3] + body_arr[4] + body_arr[5]
     else:
-        resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2")
+        resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2\nGaurav Kumar hindi2 session1")
         return str(resp)
 
     if classes.find_one({'class':class_name}):
@@ -56,7 +69,7 @@ def incoming_sms():
         resp.message("Your teachers have been notified")
 
     else:
-        resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2")
+        resp.message("Invalid: Enter your name, class, and session# separated by spaces as shown (one student at a time). Examples:\nAvi Patel grade1 session1\nRavi Rao PreK session1\nMira Singh KG session2\nGaurav Kumar hindi2 session1")
         return str(resp)
     return str(resp)
     
